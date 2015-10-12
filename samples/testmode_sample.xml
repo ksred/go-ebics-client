@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ebicsRequest xmlns="http://www.ebics.org/H003" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ebics.org/H003 http://www.ebics.org/H003/ebics_request.xsd" Version="H003" Revision="1">
+    <header authenticate="true">
+        <static>
+            <HostID>SOGEFRPPXXX</HostID>
+            <Nonce>B0333DE89C65F6ECE4060B95BDD78D50</Nonce>
+            <Timestamp>2010-06-04T08:38:47.607Z</Timestamp>
+            <PartnerID>AEBXNSG1</PartnerID>
+            <UserID>EBXNSG01</UserID>
+            <Product Language="fr">SG-Testsystem</Product>
+            <OrderDetails>
+                <OrderType>FUL</OrderType>
+                <OrderID>A00A</OrderID>
+                <OrderAttribute>DZHNN</OrderAttribute>
+                <FULOrderParams>
+                    <Parameter>
+                        <Name>TEST</Name>
+                        <Value Type="string">true</Value>
+                    </Parameter>
+                    <FileFormat CountryCode="FR">pain.xxx.cfonb160.dct</FileFormat>
+                </FULOrderParams>
+            </OrderDetails>
+            <BankPubKeyDigests>
+                <Authentication Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" Version="X002">QPET4PGr0R20f5fVIvPwKaYn7fnibFlY9k69RAYT78w=</Authentication>
+                <Encryption Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" Version="E002">bWj+X9kefkuV6X/+mbiVQ3o9wZLevJcFcbS1WMeC554=</Encryption>
+            </BankPubKeyDigests>
+            <SecurityMedium>0100</SecurityMedium>
+            <NumSegments>1</NumSegments>
+        </static>
+        <mutable>
+            <TransactionPhase>Initialisation</TransactionPhase>
+        </mutable>
+    </header>
+    <AuthSignature>
+        <ds:SignedInfo>
+        <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+        <ds:Reference URI="#xpointer(//*[@authenticate='true'])">
+        <ds:Transforms>
+        <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+        </ds:Transforms>
+        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <ds:DigestValue>iLXLq5QCmsfrnl2awLLPKt7anh4nqSqgpC0rxQqIyso=</ds:DigestValue>
+        </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>QLG4dPkDb9U75W5Q4OAck2kyP2jxWYYvRFtu4HD3uoMFshWoRX8rs5sag3HGWJWGdGJ6v/5arDgvHJZNNyrJvWn1tWt/UaIAUYtE3AFBnOhb+6hk0jGxORprTbCzqFHOj8F5nMnAjkdD3E0JTFp6yCyeYhsxkzTjfR2/SwN1cg4=</ds:SignatureValue>
+    </AuthSignature>
+    <body>
+        <DataTransfer>
+        <DataEncryptionInfo authenticate="true">
+        <EncryptionPubKeyDigest Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" Version="E002">bWj+X9kefkuV6X/+mbiVQ3o9wZLevJcFcbS1WMeC554=</EncryptionPubKeyDigest>
+        <TransactionKey>yZXEaQB4oDX7Jwdj7LkPSJoxN1WMvW34D1HdI1j4UxD2M8ILECWxeVSIPhIkHFZ1yLq84RbiL19ctvAsRPmntdQw+PXgf6zWoBgDNE3zSWZXsBqqLn+N9MYsFrfC/PngJW6SHhJfhPXjOJXXakSc5o83WBbN7QenLWNM0KYopnne64f3P2692MvQLoV4QdaMe/6dQ1o6Ml2naBR8Ez2pZMmaJ8pCGTIzsK4P0UijNTLHGI+XhhYftZtHXRP4nMoC69dnEqKZIYj9+kG2KZhcQFXbpGLO2Yhc6TiiLv6SqEozevZvSo9jcO06ZnPyrZjUd7HczCXrbAFk4c3Zgd/jBQ==</TransactionKey>
+        </DataEncryptionInfo>
+        <SignatureData
+        authenticate="true">OgjxDt3xF0NifUIhixmjdsxDiryErZm85WYLDXQcr0eftxjWrYph1Al6iEmk+6vnkSh6dVKZl7b1MCG3NT4i3UHNePAxTxV77p5/SaOjrMrd+UA/CibDstm40MoPxbvXy/kGc9c2JhIR/cnmkwvVPgLtvtNX+gAscsa4Af8Tb2TxnbsXaTdDLS4aIx5V4MAaAW8FNDTOddys8ZDX0RK3Zy7+oL+d0TGobiql2VbtwFcQu+OZuShATBxtLTd+aMn22wFDRGYnyy07OeOSJifK1/AqkXZ66AYDah+rjPsIPjPm25wFIUGGgnDG9eJ7yFwwHKstLxZWLmsNk017ZUKryT59TiVYZO0WngFh6CELv93molNABjhqMXBleCQwI+4k8Gs64uknCdFcDJH+WWW7zOp/56ZYB8M0crzLKXvZ4eE3k0qC7q1BTsl9tY2RoIwbiNaFNM1N+MyNllbkkAAJtkMmmrcKJhzBZbJZ0E4iM6g2BVQCCJFJTB7nL7TNFp1EwRgN9iCuzzUIbWIa4RY4TXnkb5CrGrH0o0P3k0Z93FfRomoN324rcBwB+mSdk8aL2KNR8XnxEhB919Qp3+uOxUBcfv1Vj/KUGc/9IQujK2Y=</SignatureData>
+        </DataTransfer>
+    </body>
+</ebicsRequest>
