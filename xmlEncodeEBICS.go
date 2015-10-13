@@ -1,9 +1,12 @@
 package main
 
 import (
+	"crypto/rand"
+	"encoding/base64"
 	"encoding/xml"
 	"fmt"
 	"os"
+	"time"
 )
 
 type ECIBSRequest struct {
@@ -85,48 +88,48 @@ type DataTransfer struct {
 }
 
 func encodeAuthHeader() {
-
+	//TODO Get relevant details for auth construction from config file or similar
 	authStructTest := ECIBSRequest{}
+
 	fmt.Printf("%#v\n", authStructTest)
 	fmt.Printf("%T\n", authStructTest)
+
+	// Generate nonce
+	nonce := generateNonce()
+	fmt.Printf("Nonce: %s\nNonce length: %v\n", nonce, len(nonce))
+	//TODO Save nonce into DB store (Redis)
+
 	os.Exit(0)
-	/*
-			type Address struct {
-				City, State string
-			}
+}
 
-			type Person struct {
-				XMLName   xml.Name `xml:"person"`
-				Id        int      `xml:"id,attr"`
-				FirstName string   `xml:"name>first"`
-				LastName  string   `xml:"name>last"`
-				Age       int      `xml:"age"`
-				Height    float32  `xml:"height,omitempty"`
-				Married   bool
-				Address
-				Comment string `xml:",comment"`
-			}
-					   <person id="13">
-				           <name>
-				               <first>John</first>
-				               <last>Doe</last>
-				           </name>
-				           <age>42</age>
-				           <Married>false</Married>
-				           <City>Hanga Roa</City>
-				           <State>Easter Island</State>
-				           <!-- Need more details. -->
-					   </person>
+func generateTimestamp() (t time.Time) {
+	t = time.Now()
+	return t
+}
 
-		v := &Person{Id: 13, FirstName: "John", LastName: "Doe", Age: 42}
-		v.Comment = " Need more details. "
-		v.Address = Address{"Hanga Roa", "Easter Island"}
+func generateNonce() (nonce string) {
+	//FIXME This needs to be a hexdec string (no - = etc)
+	nonce, err := GenerateRandomString(24)
+	if err != nil {
+		fmt.Println("An error occurred generating nonce")
+		os.Exit(1)
+	}
 
-		enc := xml.NewEncoder(os.Stdout)
-		enc.Indent("  ", "    ")
-		if err := enc.Encode(v); err != nil {
-			fmt.Printf("error: %v\n", err)
-		}
-	*/
+	return
+}
 
+func GenerateRandomBytes(n int) ([]byte, error) {
+	b := make([]byte, n)
+	_, err := rand.Read(b)
+	// Note that err == nil only if we read len(b) bytes.
+	if err != nil {
+		return nil, err
+	}
+
+	return b, nil
+}
+
+func GenerateRandomString(s int) (string, error) {
+	b, err := GenerateRandomBytes(s)
+	return base64.URLEncoding.EncodeToString(b), err
 }
