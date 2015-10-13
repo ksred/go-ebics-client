@@ -15,7 +15,8 @@ func main() {
 	//TODO Implement different methods
 	//TODO Parse to valid XML using EBICS standard
 
-	fmt.Println("EBICS client")
+	fmt.Println("######### EBICS client ##########")
+	encodeAuthHeader()
 }
 
 func checkFlags() {

@@ -6,6 +6,12 @@ import (
 	"os"
 )
 
+type ECIBSRequest struct {
+	Header
+	AuthSignature
+	Body
+}
+
 type Header struct {
 	XMLName         xml.Name `xml:"header"`
 	Authenticate    bool     `xml:"authenticate,attr"`
@@ -46,11 +52,43 @@ type BankPubKeyDigests struct {
 }
 
 type AuthSignature struct {
+	SignedInfo                xml.Name         `xml:"ds:SignedInfo"`
+	CanonicalizationMethod    xml.Name         `xml:"ds:SignedInfo>ds:CanonicalizationMethod"`
+	CanonicalizationAlgorithm string           `xml:"ds:SignedInfo>ds:CanonicalizationMethod Algorithm,attr"`
+	SignatureMethod           xml.Name         `xml:"ds:SignedInfo>ds:SignatureMethod"`
+	SignatureAlgorithm        string           `xml:"ds:SignedInfo>ds:SignatureMethod Algorithm,attr"`
+	Reference                 xml.Name         `xml:"ds:SignedInfo>ds:Reference"`
+	ReferenceURI              string           `xml:"ds:SignedInfo>ds:Reference URI,attr"`
+	Transforms                []AuthTransforms `xml:"ds:SignedInfo>ds:Transforms"`
+	DigestMethod              xml.Name         `xml:"ds:SignedInfo>ds:Transforms>ds:DigestMethod"`
+	DigestAlgorithm           string           `xml:"ds:SignedInfo>ds:Transforms>ds:DigestMethod Algorithm,attr"`
+	DigestValue               string           `xml:"ds:SignedInfo>ds:Transforms>ds:DigestValue"`
+	SignatureValue            string           `xml:"ds:SignedInfo>ds:DigestValue"`
+}
+
+type AuthTransforms struct {
+	Transform          xml.Name `xml:"ds:Transform"`
+	TransformAlgorithm string   `xml:"ds:Transform Algorithm, attr"`
+}
+
+type Body struct {
+	DataTransfer
+}
+
+type DataTransfer struct {
+	DataEncryptionInfo     xml.Name `xml:"DataEncryptionInfo"`
+	Authenticate           bool     `xml:"DataEncryptionInfo authenticate,attr"`
+	EncryptionPubKeyDigest string   `xml:"DataEncryptionInfo>EncryptionPubKeyDigest"`
+	EncryptionAlgorithm    string   `xml:"DataEncryptionInfo>EncryptionPubKeyDigest Algorithm,attr"`
+	EncryptionVersion      string   `xml:"DataEncryptionInfo>EncryptionPubKeyDigest Version,attr"`
+	TransactionKey         string   `xml:"DataEncryptionInfo>TransactionKey"`
 }
 
 func encodeAuthHeader() {
 
-	fmt.Println("")
+	authStructTest := ECIBSRequest{}
+	fmt.Printf("%#v\n", authStructTest)
+	fmt.Printf("%T\n", authStructTest)
 	os.Exit(0)
 	/*
 			type Address struct {
