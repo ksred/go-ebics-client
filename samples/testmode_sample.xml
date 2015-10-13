@@ -33,15 +33,15 @@
     </header>
     <AuthSignature>
         <ds:SignedInfo>
-        <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-        <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
-        <ds:Reference URI="#xpointer(//*[@authenticate='true'])">
-        <ds:Transforms>
-        <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
-        </ds:Transforms>
-        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
-        <ds:DigestValue>iLXLq5QCmsfrnl2awLLPKt7anh4nqSqgpC0rxQqIyso=</ds:DigestValue>
-        </ds:Reference>
+            <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <ds:Reference URI="#xpointer(//*[@authenticate='true'])">
+                <ds:Transforms>
+                    <ds:Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+                    </ds:Transforms>
+                <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+                <ds:DigestValue>iLXLq5QCmsfrnl2awLLPKt7anh4nqSqgpC0rxQqIyso=</ds:DigestValue>
+            </ds:Reference>
         </ds:SignedInfo>
         <ds:SignatureValue>QLG4dPkDb9U75W5Q4OAck2kyP2jxWYYvRFtu4HD3uoMFshWoRX8rs5sag3HGWJWGdGJ6v/5arDgvHJZNNyrJvWn1tWt/UaIAUYtE3AFBnOhb+6hk0jGxORprTbCzqFHOj8F5nMnAjkdD3E0JTFp6yCyeYhsxkzTjfR2/SwN1cg4=</ds:SignatureValue>
     </AuthSignature>

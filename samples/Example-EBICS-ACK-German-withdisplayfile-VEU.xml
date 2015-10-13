@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *****************************************************************************************************************************************************************************************************-->
+<!--PLEASE NOTE: In this example the VEU procedure is used!! -->
+<!--XML example for Customer Acknowledgement for the customer "Company Miller" that has PartnerId KUNDE567: -->
+<!--User USER1234 sends a SEPA Credit Transfer (Order No. A445, order type CCT), this is his first action   -->
+<!--The User is administrated in the VEU of the bank server, so the file is forwarded in the VEU, this is an internal bank server action, but also protocoled   -->
+<!--After that User USER1234 downloads account information (no order number (only neccessary for uploads), order type STA)  -->
+<!--Another user (USER1235) adds a signature (by VEU: Order No. A446, Order type HVE, ) to the Original Order No. A445 (CCT) -->
+<!--The ES is verified (internal action of the bank which is also protocoled).  -->
+<!--The ES is correct. Because of the fact that all necessary ES are verified the VEU-verification is complete. So the server gives the information that the order completely processed 
+on the EBICS level (HAC_ORDER_FINAL_POS) and the Display File is provided under AdditionalInformation  -->
+<!--The users communicate with the EBICS bank server "HOST-05" -->
+<!-- Note: All protocol information (since last download) for the PartnerID (for all users: here USER1234 and USER 1235) are stored in this unique XML-file-->
+<!-- *****************************************************************************************************************************************************************************************************-->
+<Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03 pain.002.001.03.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CstmrPmtStsRpt>
+		<GrpHdr>
+			<MsgId>Message-ID-4712</MsgId>
+			<CreDtTm>2011-02-04T09:30:47.000Z</CreDtTm>
+			<InitgPty>
+				<Id>
+					<OrgId>
+						<Othr>
+							<Id>HOST-05</Id>
+						</Othr>
+					</OrgId>
+				</Id>
+			</InitgPty>
+		</GrpHdr>
+		<OrgnlGrpInfAndSts>
+			<OrgnlMsgId>EBICS</OrgnlMsgId>
+			<OrgnlMsgNmId>EBICS</OrgnlMsgNmId>
+		</OrgnlGrpInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--First action of USER1234: Transmission of a file - key word for this action is FILE_UPLOAD -->
+			<OrgnlPmtInfId>FILE_UPLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action CCT ISO 8601  -->
+								<Id>2011-02-04T09:31:50.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--Transmission of the file (customer to bank) was successful (ISO external reason code TS01)-->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Bank action: verification of the ES (in this case only for transport = class T) - key word for this action is ES_VERIFICATION -->
+			<OrgnlPmtInfId>ES_VERIFICATION</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action CCT ISO 8601  -->
+								<Id>2011-02-04T09:32:05.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--ES for transport ist correct -->
+					<Cd>DS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Forwarding in the VEU - key word for this action is VEU_FORWARDING -->
+			<OrgnlPmtInfId>VEU_FORWARDING</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>	
+							<Othr>
+							<!--here: Timestamp of action forwarding ISO 8601  -->
+								<Id>2011-02-04T09:32:10.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>			
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--reason code: Order will be administrated in the VEU-->
+					<Cd>DS06</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>		
+		<OrgnlPmtInfAndSts>
+			<!--Second action of USER1234: download of account information - key word for this action is FILE_DOWNLOAD -->
+			<OrgnlPmtInfId>FILE_DOWNLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>STA</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action STA ISO 8601  -->
+								<Id>2011-02-04T09:33:00.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Transmission of the file (bank to cutomer) was successful (codes see chapter 10.3 and 10.4 in EBICS 2.5) -->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+			<!--First action of USER1235 Download of HVZ: key word for sending an ES file is FILE_UPLOAD -->
+		<OrgnlPmtInfAndSts>
+		  <OrgnlPmtInfId>FILE_DOWNLOAD</OrgnlPmtInfId>
+		  <StsRsnInf>
+			<Orgtr>
+			  <Nm>Company Miller</Nm>
+				  <Id>
+					<OrgId>
+					  <Othr>
+						<Id>KUNDE567</Id>
+						<SchmeNm>
+						  <Prtry>PartnerID</Prtry>
+						</SchmeNm>
+					  </Othr>
+					  <Othr>
+						<Id>HVZ</Id>
+						<SchmeNm>
+						  <Prtry>OrderType</Prtry>
+						</SchmeNm>
+					  </Othr>
+					  <Othr>
+						<Id>USER1235</Id>
+						<SchmeNm>
+						  <Prtry>UserID</Prtry>
+						</SchmeNm>
+					 </Othr>
+					  <Othr>
+						<Id>2011-02-04T09:35:20.000Z</Id>
+						<SchmeNm>
+						  <Prtry>TimeStamp</Prtry>
+						</SchmeNm>
+					  </Othr>
+					</OrgId>
+				  </Id>
+			</Orgtr>
+			<Rsn>
+			  <Cd>TS01</Cd>
+			</Rsn>
+		  </StsRsnInf>
+		</OrgnlPmtInfAndSts>		
+		<OrgnlPmtInfAndSts>
+			<!--Second action of USER1235 Transmission of an ES (by order type HVE (=VEU)): key word for sending an ES file is ES_UPLOAD -->
+			<OrgnlPmtInfId>ES_UPLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1235</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A446</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>HVE</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderIDRef</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderTypeRef</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action HVE ISO 8601  -->
+								<Id>2011-02-05T17:35:21.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Correct transmission -->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+		<!--Verification of the ES sent by HVE -->
+			<OrgnlPmtInfId>VEU_VERIFICATION</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1235</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A446</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>HVE</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderIDRef</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderTypeRef</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action signature verification ISO 8601  -->
+								<Id>2011-02-05T17:36:00.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Correct Electronic Signature -->
+					<Cd>DS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+		</StsRsnInf>
+	</OrgnlPmtInfAndSts>	
+	<!--End of all actions concerning VEU Verification -->
+	<OrgnlPmtInfAndSts>
+			<OrgnlPmtInfId>VEU_VERIFICATION_END</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of VEU end  -->
+								<Id>2011-02-05T17:45:00.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Correct action processing OK, forwarded for postprocessing -->
+					<Cd>DS05</Cd>
+				</Rsn>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+			<!--End label for OrderID A445 -->
+	<OrgnlPmtInfAndSts>
+			<OrgnlPmtInfId>ORDER_HAC_FINAL_POS</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+							<!--here: Timestamp of HAC_POS_END  -->
+								<Id>2011-02-05T17:45:00.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<AddtlInf>G U T S C H R I F T E N</AddtlInf>
+				<AddtlInf>Datei-ID: 4782647268346</AddtlInf>
+				<AddtlInf>Datum/Zeit: 04.02.2011/09:15:47</AddtlInf>
+				<AddtlInf>------------------------------------------------------------</AddtlInf>
+				<AddtlInf>Sammlerreferenz 				: 46573264784</AddtlInf>
+				<AddtlInf>Bank-Code							: WELADEDD</AddtlInf>
+				<AddtlInf>Kontonummer						: DE44300500000054627452</AddtlInf>
+				<AddtlInf>Auftraggeberdaten				: XXX</AddtlInf>
+				<AddtlInf>Anzahl der Zahlungssaetze	: 187</AddtlInf>
+				<AddtlInf>Summe der Betraege (EUR)	: 68.672,00</AddtlInf>
+				<AddtlInf>Ausfuehrungstermin			: 01.12.2010</AddtlInf>
+				<AddtlInf>------------------------------------------------------------</AddtlInf>
+				<AddtlInf>Sammlerreferenz					: 46573264783</AddtlInf>
+				<AddtlInf>Bank-Code							: WELADEDD</AddtlInf>
+				<AddtlInf>Kontonummer						: DE44300500000054627452</AddtlInf>
+				<AddtlInf>Auftraggeberdaten				: YYY</AddtlInf>
+				<AddtlInf>Anzahl der Zahlungssaetze	: 165</AddtlInf>
+				<AddtlInf>Summe der Betraege (EUR)	: 354.378,00</AddtlInf>
+				<AddtlInf>Ausfuehrungstermin			: 03.12.2010</AddtlInf>
+				<AddtlInf>------------------------------------------------------------</AddtlInf>
+				<AddtlInf>Sammlerreferenz					: 46573264782</AddtlInf>
+				<AddtlInf>Bank-Code							: WELADEDD</AddtlInf>
+				<AddtlInf>Kontonummer						: DE30300500000035351767</AddtlInf>
+				<AddtlInf>Auftraggeberdaten				: XXX</AddtlInf>
+				<AddtlInf>Anzahl der Zahlungssaetze	: 34</AddtlInf>
+				<AddtlInf>Summe der Betraege (EUR)	: 45.100,20</AddtlInf>
+				<AddtlInf>Ausfuehrungstermin			: 01.12.2010</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>		
+	</CstmrPmtStsRpt>
+</Document>

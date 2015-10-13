@@ -43,12 +43,11 @@ func generateKeyPair() (genResult bool) {
 		fmt.Println(err)
 		genResult = false
 	}
-
 	publickeyencoder := gob.NewEncoder(publickeyfile)
 	publickeyencoder.Encode(publickey)
 	publickeyfile.Close()
 
-	// save PEM file
+	// Save PEM file
 	pemfile, err := os.Create(PVT_PEM_PATH)
 
 	if err != nil {

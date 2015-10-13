@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *****************************************************************************************************************************************************************************************************-->
+<!--XML example for Customer Acknowledgement for the customer "Company Miller" that has PartnerId CUSTO456: -->
+<!--User USER1234 sends a CFONB 160 (French domestic credit transfer) Order No. A445, Fileformat pain.xxx.cfonb160.dct), this is his first action   -->
+<!--The file is signed by USER1235 but the ES is not correct   -->
+<!--After that User USER1234 downloads account information (no order number (only neccessary for uploads), order type FDL with FileFormat CFONB 120 statement : camt.xxx.cfonb120.stm  -->
+<!--By the end, User USER1234 sends a SCT (SEPA credit transfer) Order No. A446, Fileformat pain.001.001.02.sct with a correct signature by USER1235) -->
+<!--The users communicate with the EBICS bank server "BANKFRPPXXX" -->
+<!-- Note: All protocol information (since last download) for the PartnerID (for all users: here USER1234 and USER1235) are stored in this unique XML-file-->
+<!-- *****************************************************************************************************************************************************************************************************-->
+<Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03 pain.002.001.03.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CstmrPmtStsRpt>
+		<GrpHdr>
+			<MsgId>3491725</MsgId>
+			<CreDtTm>2010-09-01T13:43:30.997Z</CreDtTm>
+			<InitgPty>
+				<Id>
+					<OrgId>
+						<Othr>
+							<Id>BANKFRPPXXX</Id>
+						</Othr>
+					</OrgId>
+				</Id>
+			</InitgPty>
+		</GrpHdr>
+		<OrgnlGrpInfAndSts>
+			<OrgnlMsgId>EBICS</OrgnlMsgId>
+			<OrgnlMsgNmId>EBICS</OrgnlMsgNmId>
+		</OrgnlGrpInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--First action of USER1234: Transmission of a file - key word for this action is FILE_UPLOAD-->
+			<OrgnlPmtInfId>FILE_UPLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>FUL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>pain.xxx.cfonb160.dct</Id>
+								<SchmeNm>
+									<Prtry>FileFormat</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action FUL in format ISO 8601  -->
+								<Id>2011-02-04T13:43:31.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--Transmission of the file (customer to bank) was successful-->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Following action is signature verification File signed by USER1235 - key word for this action is ES_VERIFICATION -->
+			<!--This is an internal action of the bank server -->
+			<OrgnlPmtInfId>ES_VERIFICATION</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1235</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>							
+							<Othr>
+								<Id>FUL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>pain.xxx.cfonb160.dct</Id>
+								<SchmeNm>
+									<Prtry>FileFormat</Prtry>
+								</SchmeNm>
+							</Othr>									
+							<Othr>
+							<!--here: Timestamp of action signature verification ISO 8601  -->
+								<Id>2011-02-04T13:43:31.099Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--Signature verification of the file was unsuccessful because the certificate is revoked(ISO code exists DS11). -->
+					<Cd>DS11</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>		
+		<!--End label for OrderID A445 -->
+		<OrgnlPmtInfId>ORDER_HAC_FINAL_NEG</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1235</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>							
+							<Othr>
+								<Id>FUL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>pain.xxx.cfonb160.dct</Id>
+								<SchmeNm>
+									<Prtry>FileFormat</Prtry>
+								</SchmeNm>
+							</Othr>									
+							<Othr>
+								<Id>2011-02-04T13:44:31.099Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Second action of USER1234: download of account information - key word for this action is FILE_DOWNLOAD -->
+			<OrgnlPmtInfId>FILE_DOWNLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>FDL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>camt.xxx.cfonb120.stm</Id>
+								<SchmeNm>
+									<Prtry>FirlFormat</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action FDL camt.xxx.cfonb120.stmISO 8601  -->
+								<Id>2011-02-04T13:48:03.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Transmission of the file (bank to cutomer) was successful-->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>				
+		<OrgnlPmtInfAndSts>
+			<!--Third action of USER1234: Transmission of a file - key word for this action is FILE_UPLOAD -->
+			<OrgnlPmtInfId>FILE_UPLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A446</Id>
+								<SchmeNm>
+									<Prtry>OrderId</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>FUL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>	
+							<Othr>
+								<Id>pain.001.001.02.sct</Id>
+								<SchmeNm>
+									<Prtry>FileFormat</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action CCT ISO 8601  -->
+								<Id>2011-02-04T13:43:31.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--Transmission of the file (customer to bank) was successful -->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Following action is signature verification File signed by USER1235 - key word for this action tis ES_VERIFICATION -->
+			<OrgnlPmtInfId>ES_VERIFICATION</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1235</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>A446</Id>
+								<SchmeNm>
+									<Prtry>OrderId</Prtry>
+								</SchmeNm>
+							</Othr>							
+							<Othr>
+								<Id>FUL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>								
+							<Othr>
+								<Id>pain.001.001.02.sct</Id>
+								<SchmeNm>
+									<Prtry>FileFormat</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action signature verification ISO 8601  -->
+								<Id>2011-02-04T13:43:31.099Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--Signature verification of the file was successful -->
+					<Cd>DS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<!--End label for OrderID A446 (all desired actions could be processed succesfully) -->
+		<OrgnlPmtInfAndSts>		
+		<OrgnlPmtInfId>ORDER_HAC_FINAL_POS</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1235</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>CUSTO456</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>A446</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>							
+							<Othr>
+								<Id>FUL</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+								<Id>pain.001.001.02.sct</Id>
+								<SchmeNm>
+									<Prtry>FileFormat</Prtry>
+								</SchmeNm>
+							</Othr>									
+							<Othr>
+								<Id>2011-02-04T13:44:31.099Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+	</CstmrPmtStsRpt>
+</Document>

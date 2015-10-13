@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *****************************************************************************************************************************************************************************************************-->
+<!--PLEASE NOTE: In this example the user doesn't participate in the VEU procedure - NO VEU is used!! -->
+<!--XML example for Customer Acknowledgement for the customer "Company Miller" that has PartnerId KUNDE567: -->
+<!--User USER1234 sends a SEPA Credit Transfer (Order No. A445, order type CCT), this is his first action   -->
+<!--After that User USER1234 downloads account information (no order number (only neccessary for uploads), order type STA)  -->
+<!--An other user USER1239 adds a signature (not by VEU) but by attributes "UZHNN" and the same Order type CCT -->
+<!--But the ES is not correct (ISO Reason Code: DS0B) - so the end label ORDE_HAC_FINAL_NEG ist provided to show, that there is no further protocol step to this orderID-->
+<!--The users communicate with the EBICS bank server "HOST-05" -->
+<!--In between two examples/possibilities for the use of the type of action "ADDITIONAL" are shown. This can also be used in France -->
+<!-- Note: All protocol information (since last download) for the PartnerID (for all users: here USER1234 and USER 1239) are stored in this unique XML-file-->
+<!-- *****************************************************************************************************************************************************************************************************-->
+<Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03 pain.002.001.03.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<CstmrPmtStsRpt>
+		<GrpHdr>
+			<MsgId>Message-ID-4712</MsgId>
+			<CreDtTm>2011-02-04T09:30:47.000Z</CreDtTm>
+			<InitgPty>
+				<Id>
+					<OrgId>
+						<Othr>
+							<Id>HOST-05</Id>
+						</Othr>
+					</OrgId>
+				</Id>
+			</InitgPty>
+		</GrpHdr>
+		<OrgnlGrpInfAndSts>
+			<OrgnlMsgId>EBICS</OrgnlMsgId>
+			<OrgnlMsgNmId>EBICS</OrgnlMsgNmId>
+		</OrgnlGrpInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--First action of USER1234: Transmission of a file - key word for this action is FILE_UPLOAD -->
+			<OrgnlPmtInfId>FILE_UPLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action CCT ISO 8601  -->
+								<Id>2011-02-04T09:45:47.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--Transmission of the file (customer to bank) was successful (ISO external reanson code TS01)  -->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+	<!--Bank action Verification of the ES (in this case ES for transport = class T) - key word for this action is ES_VERIFICATION -->
+		<OrgnlPmtInfAndSts>
+		<OrgnlPmtInfId>ES_VERIFICATION</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action CCT ISO 8601  -->
+								<Id>2011-02-04T09:45:56.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+				<!--ES for transport ist correct -->
+					<Cd>DS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>		
+		<OrgnlPmtInfAndSts>
+			<!--Second action of USER1234: download of account information - key word for this action is FILE_DOWNLOAD -->
+			<OrgnlPmtInfId>FILE_DOWNLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>STA</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action STA ISO 8601  -->
+								<Id>2011-02-04T09:46:57.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Transmission of the file (bank to customer) was successful -->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>				
+		<OrgnlPmtInfAndSts>
+			<!--Action of USER1239; transmission of an ES with order attributes UZHNN and same order type as the order file -  key word for sending ES-files is ES_UPLOAD -->
+			<OrgnlPmtInfId>ES_UPLOAD</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1239</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action ISO 8601  -->
+								<Id>2011-02-04T12:20:20.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--The transmission of the ES was correct -->
+					<Cd>TS01</Cd>
+				</Rsn>
+				<AddtlInf>Free text (optional)</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Bank action ES-verification -  key word is ES_VERIFICATION -->
+			<OrgnlPmtInfId>ES_VERIFICATION</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1239</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action ISO 8601  -->
+								<Id>2011-02-04T12:21:20.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<Rsn>
+					<!--Error: The ES was incorrect (DS20H is one reason (=no auhtorisation for account), for further resons refer to HAC chapter 10.3 and 10.4 in EBICS 2.5 -->
+					<Cd>DS0H</Cd>
+				</Rsn>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--First Example for additional information from bank to customer without relation to any EBICS-action (optional). Here: Message for all EBICS-Partners -->
+			<OrgnlPmtInfId>ADDITIONAL</OrgnlPmtInfId>
+			<StsRsnInf>
+				<AddtlInf>Happy Easter!!!!</AddtlInf>
+				<AddtlInf>******************</AddtlInf>				
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+		<OrgnlPmtInfAndSts>
+			<!--Second Example for additional information from bank to customer without relation to any EBICS-action (optional). Here: Specific message -->
+			<OrgnlPmtInfId>ADDITIONAL</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER2222</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<AddtlInf>We received the INI-letter of the new user. The user has been activated now</AddtlInf>
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>						
+		<OrgnlPmtInfAndSts>
+			<!--There will be no further protocol step for order A445 on the EBICS level -->
+			<OrgnlPmtInfId>ORDER_HAC_FINAL_NEG</OrgnlPmtInfId>
+			<StsRsnInf>
+				<Orgtr>
+					<Nm>Company Miller</Nm>
+					<Id>
+						<OrgId>
+							<Othr>
+								<Id>USER1234</Id>
+								<SchmeNm>
+									<Prtry>UserID</Prtry>
+								</SchmeNm>
+							</Othr>
+							<Othr>
+								<Id>KUNDE567</Id>
+								<SchmeNm>
+									<Prtry>PartnerID</Prtry>
+								</SchmeNm>
+							</Othr>				
+							<Othr>
+								<Id>A445</Id>
+								<SchmeNm>
+									<Prtry>OrderID</Prtry>
+								</SchmeNm>
+							</Othr>			
+							<Othr>
+								<Id>CCT</Id>
+								<SchmeNm>
+									<Prtry>OrderType</Prtry>
+								</SchmeNm>
+							</Othr>		
+							<Othr>
+							<!--here: Timestamp of action ISO 8601  -->
+								<Id>2011-02-04T12:22:22.000Z</Id>
+								<SchmeNm>
+									<Prtry>TimeStamp</Prtry>
+								</SchmeNm>
+							</Othr>				
+						</OrgId>
+					</Id>
+				</Orgtr>
+				<AddtlInf>Important Note: with the final indicator HAC FINAL POS or NEG</AddtlInf>
+				<AddtlInf>the content of the file (displayfile) has to be shown on several additional lines here</AddtlInf>				
+				<AddtlInf>This is only a shortened example!!!!! </AddtlInf>
+				<AddtlInf>How the Displayfile looks like see in the other example or in the HAC-concept - see chapter 10 EBICS 2.5</AddtlInf>				
+				<AddtlInf>--------------------------------------------------------------------------------------------------------</AddtlInf>			
+			</StsRsnInf>
+		</OrgnlPmtInfAndSts>
+	</CstmrPmtStsRpt>
+</Document>

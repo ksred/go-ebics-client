@@ -1,0 +1,505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- *****************************************************************************************************************************************************************************************************-->
+<!--VEU with two PartnerIDs (KUNDE1 and KUNDE2) -->
+<!--User TLN01 of Partner KUNDE1 sends an CCT (SEPA Credit Transfer) file (in this case only transport, so the siganture is class T). -->
+<!--The OrderID is AA12 assigned by the server -->
+<!--User TLN04 of the same PartnerID (=KUNDE1) downloads HVZ and signs the order (for the first time by VEU) --> 
+<!--User TLN4711 of the PartnerID KUNDE2 also downloads HVZ and signs for the second time. --> 
+<!--By this the order is signed completely (two ES neccessary in this case). So the order is authorised and can be processed  -->
+<!-- -->
+<!-- This HAC is the acknowledgement of the partner KUNDE1!!!! : -->
+<!-- Note: In the HAC of the partner KUNDE1all activities of users of partner KUNDE 1 are protocolled AND - if so - all  -->
+<!-- activities of OTHER partners regarding ES (via VEU = HVE) or cancellation (via VEU = HVS) done for orders of partner KUNDE1 -->
+<!-- and the verification of these steps (in this example KUNDE2 is such a partnerID) -->
+<!-- *****************************************************************************************************************************************************************************************************-->
+<Document xsi:schemaLocation="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03 pain.002.001.03.xsd" xmlns="urn:iso:std:iso:20022:tech:xsd:pain.002.001.03" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CstmrPmtStsRpt>
+    <GrpHdr>
+      <MsgId>2011-05-23T12:19:31.434Z</MsgId>
+      <CreDtTm>2011-05-23T12:19:31.434Z</CreDtTm>
+      <InitgPty>
+        <Id>
+          <OrgId>
+            <Othr>
+              <Id>EBICS-System Kunde1</Id>
+            </Othr>
+          </OrgId>
+        </Id>
+      </InitgPty>
+    </GrpHdr>
+    <OrgnlGrpInfAndSts>
+      <OrgnlMsgId>EBICS</OrgnlMsgId>
+      <OrgnlMsgNmId>EBICS</OrgnlMsgNmId>
+    </OrgnlGrpInfAndSts>
+    <OrgnlPmtInfAndSts>
+    <!-- User TLN01 of KUNDE1uploads an order : -->
+      <OrgnlPmtInfId>FILE_UPLOAD</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>TLN01</Id>
+                <SchmeNm>
+                  <Prtry>UserID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:17:42.497Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>TS01</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+    <OrgnlPmtInfAndSts>
+     <!-- Signature (only for transport =T) of user TLN01 of KUNDE1is verified : -->
+      <OrgnlPmtInfId>ES_VERIFICATION</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>TLN01</Id>
+                <SchmeNm>
+                  <Prtry>UserID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:17:55.297Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>DS01</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+       <!-- Signature is OK, file can be stored in the VEU procedure: -->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>VEU_FORWARDING</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:17:56.009Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>DS06</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+       <!-- User TLN04 of KUNDE 1 downloads HVZ to have a look in the orders waiting for ES(s) in the VEU procedure: -->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>FILE_DOWNLOAD</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>HVZ</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>TLN04</Id>
+                <SchmeNm>
+                  <Prtry>UserID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:18:42.266Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>TS01</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+          <!-- Same User TLN04 of KUNDE 1 adds an ES to the order AA12 within the VEU procedure: -->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>ES_UPLOAD</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>HVE</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA13</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>TLN04</Id>
+                <SchmeNm>
+                  <Prtry>UserID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerIDRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderTypeRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderIDRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:18:47.552Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>TS01</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+    <!-- ES for order AA12 is checked: -->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>VEU_VERIFICATION</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>HVE</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA13</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>TLN04</Id>
+                <SchmeNm>
+                  <Prtry>UserID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerIDRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderTypeRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderIDRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:19:00.787Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>DS01</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+    <!-- Another PartnerID (KUNDE2) had added an ES to order AA12. The result of the verification is reported here -->
+    <!-- The orderID of the HVE action done by user TLN4711 of partner KUND2 has got number BB34: -->
+    <!-- Reason: A complete overview of the verified signatures for order number AA12 is neccessary for KUNDE 1-->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>VEU_VERIFICATION</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE2</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>HVE</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>BB34</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>TLN4711</Id>
+                <SchmeNm>
+                  <Prtry>UserID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerIDRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderTypeRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderIDRef</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:19:15.055Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>DS01</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+    <!-- All ES(s) for order AA12 are checked and correct: -->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>VEU_VERIFICATION_END</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:19:15.075Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <Rsn>
+          <Cd>DS05</Cd>
+        </Rsn>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+    <!-- order AA12 is final (with a positive end): -->
+    <OrgnlPmtInfAndSts>
+      <OrgnlPmtInfId>ORDER_HAC_FINAL_POS</OrgnlPmtInfId>
+      <StsRsnInf>
+        <Orgtr>
+          <Nm>MILLER AND SON</Nm>
+          <Id>
+            <OrgId>
+              <Othr>
+                <Id>KUNDE1</Id>
+                <SchmeNm>
+                  <Prtry>PartnerID</Prtry>
+                </SchmeNm>
+              </Othr>
+               <Othr>
+				<Id>CCT</Id>
+                <SchmeNm>
+                  <Prtry>OrderType</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>AA12</Id>
+                <SchmeNm>
+                  <Prtry>OrderID</Prtry>
+                </SchmeNm>
+              </Othr>
+              <Othr>
+                <Id>2011-05-23T12:19:15.470Z</Id>
+                <SchmeNm>
+                  <Prtry>TimeStamp</Prtry>
+                </SchmeNm>
+              </Othr>
+            </OrgId>
+          </Id>
+        </Orgtr>
+        <AddtlInf>G U T S C H R I F T E N</AddtlInf>
+		<AddtlInf>Datei-ID: 4782647268346</AddtlInf>
+		<AddtlInf>Datum/Zeit: 23.05.2011/09:15:47</AddtlInf>
+		<AddtlInf>------------------------------------------------------------</AddtlInf>
+		<AddtlInf>Sammlerreferenz 				: 46573264784</AddtlInf>
+		<AddtlInf>Bank-Code							: WELADEDD</AddtlInf>
+		<AddtlInf>Kontonummer						: DE44300500000054627452</AddtlInf>
+		<AddtlInf>Auftraggeberdaten				: XXX</AddtlInf>
+		<AddtlInf>Anzahl der Zahlungssaetze	: 187</AddtlInf>
+		<AddtlInf>Summe der Betraege (EUR)	: 68.672,00</AddtlInf>
+		<AddtlInf>Ausfuehrungstermin			: 23.05.2011</AddtlInf>
+		<AddtlInf>------------------------------------------------------------</AddtlInf>
+		<AddtlInf>Sammlerreferenz					: 46573264783</AddtlInf>
+		<AddtlInf>Bank-Code							: WELADEDD</AddtlInf>
+		<AddtlInf>Kontonummer						: DE44300500000054627452</AddtlInf>
+		<AddtlInf>Auftraggeberdaten				: YYY</AddtlInf>
+		<AddtlInf>Anzahl der Zahlungssaetze	: 165</AddtlInf>
+		<AddtlInf>Summe der Betraege (EUR)	: 354.378,00</AddtlInf>
+		<AddtlInf>Ausfuehrungstermin			: 23.05.2011</AddtlInf>
+		<AddtlInf>------------------------------------------------------------</AddtlInf>
+		<AddtlInf>Sammlerreferenz					: 46573264782</AddtlInf>
+		<AddtlInf>Bank-Code							: WELADEDD</AddtlInf>
+		<AddtlInf>Kontonummer						: DE30300500000035351767</AddtlInf>
+		<AddtlInf>Auftraggeberdaten				: XXX</AddtlInf>
+		<AddtlInf>Anzahl der Zahlungssaetze	: 34</AddtlInf>
+		<AddtlInf>Summe der Betraege (EUR)	: 45.100,20</AddtlInf>
+		<AddtlInf>Ausfuehrungstermin			: 23.05.2011</AddtlInf>
+      </StsRsnInf>
+    </OrgnlPmtInfAndSts>
+  </CstmrPmtStsRpt>
+</Document>
